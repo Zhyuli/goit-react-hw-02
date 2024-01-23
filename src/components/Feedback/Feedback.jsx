@@ -1,24 +1,26 @@
+import css from './Feedback.module.css';
+
 export const Feedback = ({
   feedbackCategory: { good, neutral, bad },
   totalFeedbacks,
   positiveFeedbacks,
 }) => {
   return (
-    <div>
-      <p>
-        Good: <span className="catigory">{good}</span>
+    <div className={css.feedbackBox}>
+      <p className={css.feedback}>
+        Good: <span className={css.span}>{good}</span>
       </p>
-      <p>
-        Neutral: <span className="catigory">{neutral}</span>
+      <p className={css.feedback}>
+        Neutral: <span className={css.span}>{neutral}</span>
       </p>
-      <p>
-        Bad: <span className="catigory">{bad}</span>
+      <p className={css.feedback}>
+        Bad: <span className={css.span}>{bad}</span>
       </p>
-      <p>
-        Total: <span className="catigory">{totalFeedbacks}</span>
+      <p className={css.feedback}>
+        Total: <span className={css.span}>{totalFeedbacks}</span>
       </p>
-      <p>
-        Positive: <span className="catigory">{positiveFeedbacks}</span>
+      <p className={css.feedback}>
+        Positive: <span className={css.span}>{positiveFeedbacks}%</span>
       </p>
     </div>
   );

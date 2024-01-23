@@ -1,0 +1,15 @@
+.feedback {
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.feedbackBox {
+    max-width: 100px;
+    font-size: 16px;
+}
+
+.span {
+    align-items: center;
+}
