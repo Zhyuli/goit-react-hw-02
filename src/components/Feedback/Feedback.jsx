@@ -1,4 +1,8 @@
-export const Feedback = ({ feedbackCategory: { good, neutral, bad } }) => {
+export const Feedback = ({
+  feedbackCategory: { good, neutral, bad },
+  totalFeedbacks,
+  positiveFeedbacks,
+}) => {
   return (
     <div>
       <p>
@@ -11,10 +15,10 @@ export const Feedback = ({ feedbackCategory: { good, neutral, bad } }) => {
         Bad: <span className="catigory">{bad}</span>
       </p>
       <p>
-        Total: <span className="catigory">{good}</span>
+        Total: <span className="catigory">{totalFeedbacks}</span>
       </p>
       <p>
-        Positive: <span className="catigory">{good}</span>
+        Positive: <span className="catigory">{positiveFeedbacks}</span>
       </p>
     </div>
   );

@@ -3,6 +3,7 @@ import './App.css';
 import { Options } from './components/Options/Options';
 import { Feedback } from './components/Feedback/Feedback';
 import { Description } from './components/Description/Description';
+import { Notification } from './components/Notification/Notification';
 
 const getFeedbacks = () => {
   const savedFeedbacks = window.localStorage.getItem('saved-feedbacks');
@@ -56,11 +57,25 @@ export const App = () => {
     window.localStorage.setItem('saved-clicks', clicks);
   }, [feedbackCategory, clicks]);
 
+  const isHidden = clicks === 0;
+  const totalFeedbacks = feedbackCategory.good + feedbackCategory.neutral + feedbackCategory.bad;
+  const positiveFeedbacks = Math.round(
+    ((feedbackCategory.good + feedbackCategory.neutral) / totalFeedbacks) * 100
+  );
+
   return (
     <div>
       <Description />
-      <Options onUpdate={onFeedback} />
-      <Feedback feedbackCategory={feedbackCategory} />
+      <Options onUpdate={onFeedback} onReset={onReset} isHidden={isHidden} />
+      {isHidden ? (
+        <Notification />
+      ) : (
+        <Feedback
+          feedbackCategory={feedbackCategory}
+          totalFeedbacks={totalFeedbacks}
+          positiveFeedbacks={positiveFeedbacks}
+        />
+      )}
     </div>
   );
 };
