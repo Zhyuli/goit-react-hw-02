@@ -17,29 +17,14 @@ const getFeedbacks = () => {
   };
 };
 
-const getClicks = () => {
-  const savedClicks = window.localStorage.getItem('saved-clicks');
-  if (savedClicks !== null) {
-    return JSON.parse(savedClicks);
-  }
-  return 0;
-};
-
 export const App = () => {
   const [feedbackCategory, setFeedbackCategory] = useState(getFeedbacks);
-  const [clicks, setClicks] = useState(getClicks);
-
-  // console.log(feedbackCategory);
-  // console.log(setFeedbackCategory);
-  // console.log(clicks);
-  // console.log(setClicks);
 
   const onFeedback = option => {
     setFeedbackCategory({
       ...feedbackCategory,
       [option]: feedbackCategory[option] + 1,
     });
-    setClicks(clicks + 1);
   };
 
   const onReset = () => {
@@ -49,19 +34,17 @@ export const App = () => {
       neutral: 0,
       bad: 0,
     });
-    setClicks(0);
   };
 
   useEffect(() => {
     window.localStorage.setItem('saved-feedbacks', JSON.stringify(feedbackCategory));
-    window.localStorage.setItem('saved-clicks', clicks);
-  }, [feedbackCategory, clicks]);
+  }, [feedbackCategory]);
 
-  const isHidden = clicks === 0;
   const totalFeedbacks = feedbackCategory.good + feedbackCategory.neutral + feedbackCategory.bad;
   const positiveFeedbacks = Math.round(
     ((feedbackCategory.good + feedbackCategory.neutral) / totalFeedbacks) * 100
   );
+  const isHidden = totalFeedbacks === 0;
 
   return (
     <div>
